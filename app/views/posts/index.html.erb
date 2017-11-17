@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header">
+  <h1>商品一覧</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <%= paginate @posts %>
+  </div>
+  <% @posts.each do |post| %>
+    <div class="row col-sm-6">
+      <div class="img-box">
+        <% if post.pictures.empty? %>
+          <%= image_tag '/no_image.jpg', :size => '300x300' %><img src="/no_image.png">
+        <% else %>
+          <ul>
+            <% post.pictures.first(1).each do |pic| %>
+              <div id="picture_<%= pic.id %>">
+                <%= image_tag(pic.image.url(:thumb)) %>
+              </div>
+            <% end %>
+          </ul>
+        <% end %>
+        <h2><%= link_to post.name, post_path(post) %></h2>
+        <h2><%= post.price %>円</h2>
+        <h2><%= post.body %></h2>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <%= paginate @posts %>
+  </div>
+</div>

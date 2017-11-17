@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF=8">
+    <meta http-equiv="content-language" content="ja">   <meta name="viewport" content="width=device-witch, initial-scale=1">
+
+    <title>Ecapp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <style>
+
+      ul, ol {list-style: none;}
+      
+      img {
+        vertical-align: bottom;
+        padding-bottom: 15px;
+      }
+
+      h1, h2, p {text-align: center;}
+
+      h2 {margin: 10px;}
+
+      .form input[type="text"], 
+      .form input[type="password"], 
+      .form input[type="number"], 
+      .form input[type="submit"], 
+      .form textarea {
+        display: block;
+        margin: 15px auto;
+        border-radius: 4px;
+        line-height: 32px;
+        border: 1px solid black;
+        padding: 0 15px;
+        -moz-box-shadow: 2px 2px 13px #021524;
+        -webkit-box-shadow: 2px 2px 13px #021524;
+        box-shadow: 2px 2px 13px #021524;        
+      }
+      .form input[type="text"], 
+      .form input[type="password"],
+      .form textarea {
+        width: 100%;
+      }
+      .form input[type="number"], 
+      .form input[type="submit"] {
+        width: 50%;
+      }
+      .form .button {
+        margin: 20px auto 0;
+        display: block;
+        width: 200px;
+        background-color: #8888bb;
+        line-height: 44px;
+        text-align: center;
+        font-size: 22px;
+        border-radius: 6px;
+        appearance: none;
+        border: none;
+        color: #fff;
+  }
+      .img-box {
+        text-align: center;
+      }
+
+      /*responsive*/
+
+      @media all and (max-width: 768px) {
+        img {padding: 15px;}
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="navbar navbar-fixed-top" role="navigation" style="background-color: gray">
+  	   <% if user_signed_in? %>
+  		  <span><%= current_user.nickname %>さんでログインしています。
+        <br><%= link_to "マイページ", "/users/#{current_user.id}" %>
+  		  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %></span>
+  	   <% else %>
+  		  <%= link_to "ログイン", new_user_session_path %>
+  	   <% end %>
+      <% if user_signed_in? %>
+        <%= link_to '新規出品', new_post_path %>
+      <% end %>
+       <br><%= render_breadcrumbs %>
+    </header>
+    <div class="container" style="padding-top: 55px">
+      <%= yield %>
+    </div>
+  </body>
+</html>

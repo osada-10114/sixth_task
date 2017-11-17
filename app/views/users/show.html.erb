@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h1>マイページ<small>　ユーザー名：<%= @nickname %>さん</small><h1>
+</div>
+<div class="container">
+  <div class="row">
+    <%= paginate @posts %>
+  </div>
+  <% @posts.each do |post| %>
+    <div class="row col-sm-6">
+      <div class="img-box">
+        <% if post.pictures.empty? %>
+          <%= image_tag '/no_image.jpg', :size => '300x300' %><img src="/no_image.png">
+        <% else %>
+          <ul>
+            <% post.pictures.first(1).each do |pic| %>
+              <div id="picture_<%= pic.id %>">
+                <%= image_tag pic.image.url(:thumb) %>
+              </div>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+      <h2><%= post.name %></h2>
+      <h2><%= post.price %>円</h2>
+      <h2><%= post.body %></h2>
+    </div>
+  <% end %>
+  <%= paginate @posts %>
+</div>

@@ -1,0 +1,31 @@
+<%= form_with(model: post, local: true, :html => {multipart: true }) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container form">    
+    <div class="row">
+      <h2>商品名</h2>
+      <%= form.text_field :name, id: :post_name, placeholder: "商品名を入力してください", required: true %>
+    </div>
+    <div class="row">
+      <h2>価格（単位：円）</h2>
+      <%= form.number_field :price, id: :post_price, placeholder: "半角数字で入力してください", required: true %>
+    </div>
+    <div class="row">
+      <h2>商品説明</h2>
+      <%= form.text_area :body, id: :post_body, required: true %><br>
+    </div>
+    <div class="row">
+      <h2>画像(複数可)</h2>
+      <%= file_field_tag "images[]", type: :file, multiple: true %>
+    </div>
+    <%= form.submit "この内容で登録する", class: "button" %>
+  </div>
+<% end %>
