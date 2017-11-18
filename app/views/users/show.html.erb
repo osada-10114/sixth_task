@@ -20,7 +20,7 @@
           </ul>
         <% end %>
       </div>
-      <h2><%= post.name %></h2>
+      <h2><%= link_to post.name, post_path(post) %></h2>
       <h2><%= post.price %>円</h2>
       <h2><%= post.body %></h2>
     </div>
