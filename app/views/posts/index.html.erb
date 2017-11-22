@@ -24,6 +24,13 @@
         <h2><%= link_to post.name, post_path(post) %></h2>
         <h2><%= post.price %>円</h2>
         <h2><%= post.body %></h2>
+        <% if post.stock == 0 %>
+          <h2 style="color: gray;">在庫なし</h2>
+        <% elsif post.stock < 10 %>
+          <h2 style="color: red;">在庫<%= post.stock %>個</h2>
+        <% else post.stock >= 10 %>
+          <h2 style="color: blue;">在庫あり</h2>
+        <% end %>
       </div>
     </div>
   <% end %>

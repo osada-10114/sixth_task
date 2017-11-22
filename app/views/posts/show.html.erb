@@ -36,6 +36,24 @@
    
     <h2>商品説明</h2>
     <p><%= @post.body %></p>
+    <% if @post.stock == 0 %>
+      <h2 style="color: gray;">在庫なし</h2>
+    <% elsif @post.stock < 10 %>
+      <h2 style="color: red;">在庫<%= @post.stock %>個</h2>
+    <% else %>
+      <h2 style="color: blue;">在庫あり</h2>
+    <% end %>
+    <% if @post.stock > 0 %>
+      <% if consumer_signed_in? %>
+        <% if @post.ordered_by? current_consumer %>
+          <%= link_to "カートから削除する", post_order_posts_path(@post), method: :delete, class: "button" %>
+        <% else %>
+          <%= link_to "この商品をカートに入れる", post_order_posts_path(@post), method: :post, class: "button" %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>注文できません</p>
+    <% end %>
   </div>
 
   <div class="row">
@@ -46,6 +64,5 @@
     		confirm: '本当に削除しますか？' } %> | 
       <% end %>
     <% end %>
-    <%= link_to '戻る', posts_path %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>マイページ<small>　管理者：<%= current_user.nickname %>さん</small><h1>
+  <h1>カート一覧<small>　ユーザー名：<%= @nickname %>さん</small><h1>
 </div>
 <div class="container">
   <div class="row">

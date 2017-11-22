@@ -11,10 +11,15 @@ Rails.application.routes.draw do
   	passwords: 'users/passwords'
   }
   
-  resources :posts
+  resources :consumers, only: [:index, :show] do
+    get :order_posts, on: :member
+  end
+
+  resources :posts do
+    resource :order_posts, only: [:create, :destroy]
+  end
   root 'posts#index'
 
   get 'users/:id' => 'users#show', as: 'user'
-  get 'consumers/:id' => 'consumers#show', as: 'consumer'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
