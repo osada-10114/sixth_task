@@ -36,6 +36,18 @@
    
     <h2>商品説明</h2>
     <p><%= @post.body %></p>
+    <% if @post.stock == 0 %>
+      <h2 style="color: gray;">在庫なし</h2>
+    <% elsif @post.stock < 10 %>
+      <h2 style="color: red;">在庫<%= @post.stock %>個</h2>
+    <% else %>
+      <h2 style="color: blue;">在庫あり</h2>
+    <% end %>
+    <% if @post.stock > 0 %>
+      <%= link_to "この商品を注文する", post_path, class: "button" %>
+    <% else %>
+      <p>注文できません</p>
+    <% end %>
   </div>
 
   <div class="row">
